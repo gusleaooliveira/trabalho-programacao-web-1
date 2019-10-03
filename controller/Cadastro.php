@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Cadastro de Usuários
+    </title>
+
+
+    <link rel="stylesheet" href="../node_modules/w3-css/3/w3.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+
 <?php
 
 if($_POST){
@@ -18,14 +36,13 @@ if($_POST){
         else {
             array_push($_SESSION['usuarios'], serialize($usuario));
         }
-        echo 'Volte e cadastre o próximo usuário!';
+        echo '<h3 class="w3-green">Volte e cadastre o próximo usuário!<a href="../index.html">voltar</a></h3>';
     }
     else if(count($_SESSION['usuarios']) == 2){
         array_push($_SESSION['usuarios'], serialize($usuario));
         for($i = 0; $i < count($_SESSION['usuarios']); $i++){
             $usuario = unserialize($_SESSION['usuarios'][$i]);
             echo $usuario;
-            echo '<hr/>';
         }
     }
     else {
@@ -34,10 +51,14 @@ if($_POST){
         for($i = 0; $i < count($_SESSION['usuarios']); $i++){
             $usuario = unserialize($_SESSION['usuarios'][$i]);
             echo $usuario;
-            echo '<hr/>';
         }
     }
 
 
 }
 ?>
+
+
+</body>
+
+</html>

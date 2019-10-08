@@ -47,11 +47,29 @@ if($_POST){
     }
     else {
         
-        
+        $media = 0;
+        $media_imc = 0;
         for($i = 0; $i < count($_SESSION['usuarios']); $i++){
             $usuario = unserialize($_SESSION['usuarios'][$i]);
             echo $usuario;
+            $media += $usuario->idade;
+            $media_imc += $usuario->calcular_imc(); 
         }
+        $media /= count($_SESSION['usuarios']);
+        $media_imc /= count($_SESSION['usuarios']);
+
+        $user_temp = new Usuario();
+        $categoria = $user_temp->gera_categoria($media_imc);
+
+        echo '<div class="w3-margin w3-card">';
+        echo '<h3 class="w3-green w3-center"> Calculo de médias </h3>';
+        echo '<div class="w3-padding">';
+        echo "<p>A média de idade dos usuários é: <strong>$media</strong></p>";
+        echo "<p>A média de imc dos usuários é <strong>$media_imc</strong></p>";
+        echo "<p>A mesma(<strong>$media_imc</strong>) é equivalente à categoria: <strong>$categoria</strong>";
+        echo '</div>';
+        echo '</div>';
+
     }
 
 
